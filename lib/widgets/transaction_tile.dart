@@ -17,11 +17,7 @@ class TransactionTile extends StatelessWidget {
   final VoidCallback? onDelete;
 
   /// Creates a [TransactionTile].
-  const TransactionTile({
-    super.key,
-    required this.transaction,
-    this.onDelete,
-  });
+  const TransactionTile({super.key, required this.transaction, this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +30,7 @@ class TransactionTile extends StatelessWidget {
         CategoryHelper.categoryIcons[transaction.category] ?? Icons.category;
     final categoryColor =
         CategoryHelper.categoryColors[transaction.category] ??
-            AppColors.textSecondary;
+        AppColors.textSecondary;
 
     Widget tile = Card(
       elevation: 1,
@@ -67,19 +63,34 @@ class TransactionTile extends StatelessWidget {
         ),
         subtitle: Text(
           '${transaction.category} \u2022 $formattedDate',
-          style: const TextStyle(
-            fontSize: 12,
-            color: AppColors.textSecondary,
-          ),
+          style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
         ),
-        // ── Trailing: formatted amount ─────────────────────────
-        trailing: Text(
-          '${amountPrefix}Rs.${transaction.amount.toStringAsFixed(2)}',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: amountColor,
-          ),
+        // ── Trailing: amount + delete button ──────────────────
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              '${amountPrefix}Rs.${transaction.amount.toStringAsFixed(2)}',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: amountColor,
+              ),
+            ),
+            if (onDelete != null) ...[
+              const SizedBox(width: 4),
+              IconButton(
+                icon: const Icon(
+                  Icons.delete_outline,
+                  color: AppColors.expense,
+                ),
+                iconSize: 20,
+                splashRadius: 20,
+                onPressed: onDelete,
+                tooltip: 'Delete transaction',
+              ),
+            ],
+          ],
         ),
       ),
     );
@@ -94,8 +105,7 @@ class TransactionTile extends StatelessWidget {
           padding: const EdgeInsets.only(right: 20),
           decoration: BoxDecoration(
             color: AppColors.expense.withValues(alpha: 0.15),
-            borderRadius:
-                BorderRadius.circular(AppConstants.cardBorderRadius),
+            borderRadius: BorderRadius.circular(AppConstants.cardBorderRadius),
           ),
           child: const Icon(Icons.delete, color: AppColors.expense),
         ),
