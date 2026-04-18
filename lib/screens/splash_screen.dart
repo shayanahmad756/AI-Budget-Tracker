@@ -33,10 +33,13 @@ class _SplashScreenState extends State<SplashScreen>
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
     );
 
-    _slideAnimation = Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero)
-        .animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeOutCubic),
-    );
+    _slideAnimation =
+        Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: Curves.easeOutCubic,
+          ),
+        );
 
     // Start animation and navigate
     _animationController.forward();
@@ -61,7 +64,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.cardBackground,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -76,10 +79,7 @@ class _SplashScreenState extends State<SplashScreen>
                   height: 120,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [
-                        AppColors.primary,
-                        AppColors.primaryLight,
-                      ],
+                      colors: [AppColors.primary, AppColors.primaryLight],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
@@ -111,10 +111,10 @@ class _SplashScreenState extends State<SplashScreen>
                   children: [
                     Text(
                       'Budget Tracker',
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      style: Theme.of(context).textTheme.headlineSmall
+                          ?.copyWith(
                             fontSize: 32,
                             fontWeight: FontWeight.w800,
-                            color: AppColors.textPrimary,
                             letterSpacing: -0.5,
                           ),
                     ),
@@ -122,10 +122,9 @@ class _SplashScreenState extends State<SplashScreen>
                     Text(
                       'Smart Financial Management',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.textSecondary,
-                            letterSpacing: 0.5,
-                            fontWeight: FontWeight.w500,
-                          ),
+                        letterSpacing: 0.5,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ],
                 ),
@@ -141,9 +140,7 @@ class _SplashScreenState extends State<SplashScreen>
                 width: 40,
                 height: 40,
                 child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    AppColors.primary,
-                  ),
+                  valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
                   strokeWidth: 3,
                 ),
               ),
