@@ -60,10 +60,6 @@ class HomeScreen extends StatelessWidget {
 
                       // ── Category Breakdown Pie Chart ──────────────
                       _buildCategoryBreakdown(provider),
-                      const SizedBox(height: 24),
-
-                      // ── AI Insights ───────────────────────────────
-                      _buildInsights(provider),
                       const SizedBox(height: 200), // space for multiple FABs
                     ],
                   ),
@@ -438,27 +434,4 @@ class HomeScreen extends StatelessWidget {
   }
 
   /// Builds the AI insights section.
-  Widget _buildInsights(TransactionProvider provider) {
-    final insights = provider.insights;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'AI Insights',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: AppColors.textPrimary,
-          ),
-        ),
-        const SizedBox(height: 12),
-        ...insights.map(
-          (insight) => Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: InsightCard(insight: insight),
-          ),
-        ),
-      ],
-    );
-  }
 }
