@@ -32,8 +32,7 @@ class _AISuggestionsScreenState extends State<AISuggestionsScreen> {
     setState(() => _isLoading = true);
 
     final provider = context.read<TransactionProvider>();
-    _suggestions =
-        AIService.generateDetailedSuggestions(provider.transactions);
+    _suggestions = AIService.generateDetailedSuggestions(provider.transactions);
 
     setState(() => _isLoading = false);
   }
@@ -79,22 +78,17 @@ class _AISuggestionsScreenState extends State<AISuggestionsScreen> {
 
   /// Removes emoji prefix from suggestion for cleaner display.
   String _cleanSuggestionText(String suggestion) {
-    // Remove emoji and any leading space
-    return suggestion.replaceAll(RegExp(r'^[^\w]*'), '').trim();
+    // Keep text as-is, no emoji removal needed since we removed emojis
+    return suggestion;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Smart Suggestions'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('Smart Suggestions'), centerTitle: true),
       body: _isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
+          ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(
               onRefresh: () async => _generateSuggestions(),
               child: ListView.builder(
@@ -134,11 +128,8 @@ class _AISuggestionsScreenState extends State<AISuggestionsScreen> {
       ),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius:
-              BorderRadius.circular(AppConstants.cardBorderRadius),
-          border: Border(
-            left: BorderSide(color: color, width: 4),
-          ),
+          borderRadius: BorderRadius.circular(AppConstants.cardBorderRadius),
+          border: Border(left: BorderSide(color: color, width: 4)),
         ),
         child: Padding(
           padding: const EdgeInsets.all(AppConstants.defaultPadding),

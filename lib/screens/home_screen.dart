@@ -32,9 +32,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (_) => const HistoryScreen(),
-                    ),
+                    MaterialPageRoute(builder: (_) => const HistoryScreen()),
                   );
                 },
               ),
@@ -210,8 +208,11 @@ class HomeScreen extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.warning_amber_rounded,
-                        color: Colors.amber.shade800, size: 20),
+                    Icon(
+                      Icons.warning_amber_rounded,
+                      color: Colors.amber.shade800,
+                      size: 20,
+                    ),
                     const SizedBox(width: 8),
                     const Expanded(
                       child: Text(
@@ -239,8 +240,8 @@ class HomeScreen extends StatelessWidget {
     final scoreColor = score > 70
         ? AppColors.income
         : score > 40
-            ? Colors.amber
-            : AppColors.expense;
+        ? Colors.amber
+        : AppColors.expense;
 
     return Card(
       elevation: 2,
@@ -276,8 +277,7 @@ class HomeScreen extends StatelessWidget {
                         value: (score / 100).clamp(0.0, 1.0),
                         strokeWidth: 10,
                         backgroundColor: AppColors.background,
-                        valueColor:
-                            AlwaysStoppedAnimation<Color>(scoreColor),
+                        valueColor: AlwaysStoppedAnimation<Color>(scoreColor),
                       ),
                     ),
                     Text(
@@ -328,8 +328,11 @@ class HomeScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 32),
                   child: Column(
                     children: [
-                      Icon(Icons.pie_chart_outline,
-                          size: 48, color: AppColors.textSecondary),
+                      Icon(
+                        Icons.pie_chart_outline,
+                        size: 48,
+                        color: AppColors.textSecondary,
+                      ),
                       SizedBox(height: 8),
                       Text(
                         'No expense data yet',
@@ -367,8 +370,8 @@ class HomeScreen extends StatelessWidget {
     final total = breakdown.values.fold(0.0, (a, b) => a + b);
     return breakdown.entries.map((entry) {
       final percent = (entry.value / total * 100);
-      final color = CategoryHelper.categoryColors[entry.key] ??
-          AppColors.textSecondary;
+      final color =
+          CategoryHelper.categoryColors[entry.key] ?? AppColors.textSecondary;
       return PieChartSectionData(
         value: entry.value,
         color: color,
@@ -389,18 +392,15 @@ class HomeScreen extends StatelessWidget {
       spacing: 16,
       runSpacing: 8,
       children: breakdown.entries.map((entry) {
-        final color = CategoryHelper.categoryColors[entry.key] ??
-            AppColors.textSecondary;
+        final color =
+            CategoryHelper.categoryColors[entry.key] ?? AppColors.textSecondary;
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
               width: 12,
               height: 12,
-              decoration: BoxDecoration(
-                color: color,
-                shape: BoxShape.circle,
-              ),
+              decoration: BoxDecoration(color: color, shape: BoxShape.circle),
             ),
             const SizedBox(width: 4),
             Text(
@@ -431,10 +431,12 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        ...insights.map((insight) => Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: InsightCard(insight: insight),
-            )),
+        ...insights.map(
+          (insight) => Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: InsightCard(insight: insight),
+          ),
+        ),
       ],
     );
   }

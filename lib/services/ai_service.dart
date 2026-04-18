@@ -12,26 +12,20 @@ class AIService {
 
   static const Map<String, List<String>> _categoryKeywords = {
     'Food': [
-      'food', 'biryani', 'restaurant', 'lunch', 'dinner', 'breakfast', 'meal',
+      'food',
+      'biryani',
+      'restaurant',
+      'lunch',
+      'dinner',
+      'breakfast',
+      'meal',
     ],
-    'Travel': [
-      'uber', 'petrol', 'fuel', 'taxi', 'bus', 'train', 'flight',
-    ],
-    'Bills': [
-      'rent', 'bill', 'electricity', 'water', 'internet', 'phone',
-    ],
-    'Shopping': [
-      'shopping', 'amazon', 'flipkart', 'clothes', 'shoes',
-    ],
-    'Entertainment': [
-      'movie', 'netflix', 'game', 'concert',
-    ],
-    'Health': [
-      'doctor', 'medicine', 'hospital', 'gym',
-    ],
-    'Education': [
-      'course', 'book', 'school', 'college', 'tuition',
-    ],
+    'Travel': ['uber', 'petrol', 'fuel', 'taxi', 'bus', 'train', 'flight'],
+    'Bills': ['rent', 'bill', 'electricity', 'water', 'internet', 'phone'],
+    'Shopping': ['shopping', 'amazon', 'flipkart', 'clothes', 'shoes'],
+    'Entertainment': ['movie', 'netflix', 'game', 'concert'],
+    'Health': ['doctor', 'medicine', 'hospital', 'gym'],
+    'Education': ['course', 'book', 'school', 'college', 'tuition'],
   };
 
   /// Determines the most likely spending category for [text] using
@@ -84,11 +78,10 @@ class AIService {
 
     // --- Highest spending category ---
     if (categoryTotals.isNotEmpty) {
-      final highest = categoryTotals.entries
-          .reduce((a, b) => a.value >= b.value ? a : b);
-      insights.add(
-        'You spent the most on ${highest.key} this period',
+      final highest = categoryTotals.entries.reduce(
+        (a, b) => a.value >= b.value ? a : b,
       );
+      insights.add('You spent the most on ${highest.key} this period');
     }
 
     // --- 7-day trend comparison ---
@@ -100,9 +93,10 @@ class AIService {
         .where((t) => t.date.isAfter(sevenDaysAgo))
         .length;
     final previousCount = transactions
-        .where((t) =>
-            t.date.isAfter(fourteenDaysAgo) &&
-            t.date.isBefore(sevenDaysAgo))
+        .where(
+          (t) =>
+              t.date.isAfter(fourteenDaysAgo) && t.date.isBefore(sevenDaysAgo),
+        )
         .length;
 
     if (recentCount > previousCount) {
@@ -135,10 +129,7 @@ class AIService {
   /// *  0  = expenses far exceed income
   ///
   /// Returns `50.0` when [totalIncome] is zero (no data to evaluate).
-  static double calculateHealthScore(
-    double totalIncome,
-    double totalExpenses,
-  ) {
+  static double calculateHealthScore(double totalIncome, double totalExpenses) {
     // No income data — neutral score
     if (totalIncome == 0) return 50.0;
 
@@ -170,10 +161,11 @@ class AIService {
   /// * Income vs expense trends
   /// * Financial health alerts
   static List<String> generateDetailedSuggestions(
-      List<TransactionModel> transactions) {
+    List<TransactionModel> transactions,
+  ) {
     if (transactions.isEmpty) {
       return [
-        'Start adding transactions to get personalized financial suggestions!'
+        'Start adding transactions to get personalized financial suggestions!',
       ];
     }
 
@@ -196,12 +188,15 @@ class AIService {
 
     // --- Suggestion 1: Highest spending category ---
     if (categoryTotals.isNotEmpty) {
-      final highest = categoryTotals.entries
-          .reduce((a, b) => a.value >= b.value ? a : b);
-      final percentage = (highest.value / totalExpenses * 100).toStringAsFixed(0);
+      final highest = categoryTotals.entries.reduce(
+        (a, b) => a.value >= b.value ? a : b,
+      );
+      final percentage = (highest.value / totalExpenses * 100)
+          .toStringAsFixed(0);
+      final tips = _getImprovementTipsForCategory(highest.key);
       suggestions.add(
-        '💰 You spent Rs.${highest.value.toStringAsFixed(0)} on ${highest.key} ($percentage% of total). '
-        'Consider budgeting this category more carefully.',
+        'You spent Rs.${highest.value.toStringAsFixed(0)} on ${highest.key} ($percentage% of total).\n'
+        'How to improve: $tips',
       );
     }
 
@@ -213,28 +208,29 @@ class AIService {
       final top2 = sorted[1];
       final ratio = (top1.value / top2.value).toStringAsFixed(1);
       suggestions.add(
-        '📊 Your ${top1.key} spending is $ratio× higher than ${top2.key}. '
-        'Try reducing ${top1.key} expenses by 10-15% to boost savings.',
+        'Your ${top1.key} spending is $ratio× higher than ${top2.key}.\n'
+        'Action: Try reducing ${top1.key} expenses by 10-15% to boost savings.',
       );
     }
 
     // --- Suggestion 3: Savings potential ---
     if (totalIncome > 0 && totalExpenses > 0) {
-      final savingsRate = ((totalIncome - totalExpenses) / totalIncome * 100);
+      final savingsRate =
+          ((totalIncome - totalExpenses) / totalIncome * 100);
       if (savingsRate < 20) {
         suggestions.add(
-          '🎯 Your savings rate is only ${savingsRate.toStringAsFixed(1)}%. '
-          'Aim for at least 20% savings by cutting non-essential expenses.',
+          'Your savings rate is only ${savingsRate.toStringAsFixed(1)}% - Below target of 20%.\n'
+          'Action steps: (1) Track all expenses for 2 weeks, (2) Cut non-essentials like subscriptions, (3) Reduce dining out, (4) Set automatic savings on payday, (5) Build 3-month emergency fund.',
         );
       } else if (savingsRate >= 20 && savingsRate < 50) {
         suggestions.add(
-          '✅ Great! You\'re saving ${savingsRate.toStringAsFixed(1)}% of your income. '
-          'Keep up this momentum and consider investing your savings.',
+          'Great! You are saving ${savingsRate.toStringAsFixed(1)}% of your income.\n'
+          'Next steps: (1) Open high-interest savings account, (2) Invest in mutual fund SIP (10-12% returns), (3) Build 6-month emergency fund, (4) Start retirement planning.',
         );
       } else {
         suggestions.add(
-          '🌟 Excellent! You\'re saving ${savingsRate.toStringAsFixed(1)}% of your income. '
-          'You\'re ahead of most people. Consider long-term investment goals.',
+          'Excellent! You are saving ${savingsRate.toStringAsFixed(1)}% of your income - ahead of most people.\n'
+          'Advanced goals: (1) Diversify investments (stocks, bonds, real estate), (2) Build passive income streams, (3) Plan for early retirement, (4) Create long-term wealth strategy.',
         );
       }
     }
@@ -249,10 +245,12 @@ class AIService {
         .fold<double>(0, (sum, t) => sum + t.amount);
 
     final previousExpenses = transactions
-        .where((t) =>
-            t.type == 'expense' &&
-            t.date.isAfter(sixtyDaysAgo) &&
-            t.date.isBefore(thirtyDaysAgo))
+        .where(
+          (t) =>
+              t.type == 'expense' &&
+              t.date.isAfter(sixtyDaysAgo) &&
+              t.date.isBefore(thirtyDaysAgo),
+        )
         .fold<double>(0, (sum, t) => sum + t.amount);
 
     if (previousExpenses > 0) {
@@ -260,13 +258,13 @@ class AIService {
           ((recentExpenses - previousExpenses) / previousExpenses * 100);
       if (changePercent > 10) {
         suggestions.add(
-          '⚠️ Your spending increased by ${changePercent.toStringAsFixed(1)}% this month. '
-          'Review recent transactions to identify unnecessary expenses.',
+          'WARNING: Your spending increased by ${changePercent.toStringAsFixed(1)}% this month.\n'
+          'How to fix: (1) Identify unusual transactions, (2) Stop discretionary purchases for 1 month, (3) Return to previous spending level, (4) Set category budgets to prevent overspending.',
         );
       } else if (changePercent < -10) {
         suggestions.add(
-          '🎉 Your spending decreased by ${(-changePercent).toStringAsFixed(1)}% this month. '
-          'Excellent expense control! Keep this up.',
+          'Excellent! Your spending decreased by ${(-changePercent).toStringAsFixed(1)}% this month.\n'
+          'How to maintain: Continue same habits, invest the savings, celebrate progress, and inspire others with your discipline.',
         );
       }
     }
@@ -274,18 +272,44 @@ class AIService {
     // --- Suggestion 5: Income vs Expense alert ---
     if (totalExpenses > totalIncome && totalIncome > 0) {
       final deficit = totalExpenses - totalIncome;
+      final deficitPercent = (deficit / totalIncome * 100).toStringAsFixed(1);
       suggestions.add(
-        '🚨 Alert: You\'re spending Rs.${deficit.toStringAsFixed(0)} more than you earn. '
-        'Review your budget and cut non-essential expenses immediately.',
+        'ALERT: You are spending Rs.${deficit.toStringAsFixed(0)} more than you earn ($deficitPercent% deficit).\n'
+        'Urgent actions: (1) Stop all non-essential spending immediately, (2) Cut each category by 20-30%, (3) Find side income or freelance work, (4) Create realistic budget, (5) Track daily spending.',
       );
     } else if (totalIncome > totalExpenses && totalExpenses > 0) {
       final surplus = totalIncome - totalExpenses;
+      final surplusPercent = (surplus / totalIncome * 100).toStringAsFixed(1);
       suggestions.add(
-        '💚 Great! You have a surplus of Rs.${surplus.toStringAsFixed(0)} after all expenses. '
-        'Consider saving or investing this amount.',
+        'Great! You have surplus of Rs.${surplus.toStringAsFixed(0)} ($surplusPercent% after expenses).\n'
+        'Money allocation: (1) 50% - Emergency fund (6 months expenses), (2) 30% - Investments/Retirement, (3) 15% - Personal goals, (4) 5% - Charity/Helping others.',
       );
     }
 
-    return suggestions.isEmpty ? ['Keep tracking your finances!'] : suggestions;
+    return suggestions.isEmpty
+        ? ['Keep tracking your finances!']
+        : suggestions;
+  }
+
+  /// Returns category-specific improvement tips.
+  static String _getImprovementTipsForCategory(String category) {
+    switch (category) {
+      case 'Food':
+        return 'Plan meals weekly, cook at home, limit dining out to 2x/month, buy in bulk, use cashback apps.';
+      case 'Travel':
+        return 'Carpool when possible, use public transport, combine trips, maintain vehicle regularly, work-from-home days.';
+      case 'Shopping':
+        return 'Make shopping list, wait 24hrs before buying, use coupons, avoid impulse purchases, shop only when needed.';
+      case 'Entertainment':
+        return 'Share subscriptions with family, use free entertainment options, limit dining out, enjoy free outdoor activities.';
+      case 'Bills':
+        return 'Negotiate bills, switch providers for better rates, unsubscribe unused services, use energy-saving practices.';
+      case 'Health':
+        return 'Use generic medicines, focus on preventive care, exercise at home, use fitness tracking apps.';
+      case 'Education':
+        return 'Use free online courses, share resources, study in groups, buy used books, watch educational videos.';
+      default:
+        return 'Review these expenses, eliminate unnecessary ones, and track daily to find spending patterns.';
+    }
   }
 }
