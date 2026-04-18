@@ -65,10 +65,7 @@ class _AIChatbotScreenState extends State<AIChatbotScreen> {
         surfaceTintColor: Colors.transparent,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
-          child: Container(
-            color: AppColors.border,
-            height: 1,
-          ),
+          child: Container(color: AppColors.border, height: 1),
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
@@ -77,9 +74,7 @@ class _AIChatbotScreenState extends State<AIChatbotScreen> {
       ),
       body: _isLoading
           ? const Center(
-              child: CircularProgressIndicator(
-                color: AppColors.primary,
-              ),
+              child: CircularProgressIndicator(color: AppColors.primary),
             )
           : RefreshIndicator(
               color: AppColors.primary,
@@ -117,10 +112,7 @@ class _AIChatbotScreenState extends State<AIChatbotScreen> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: LinearGradient(
-                  colors: [
-                    AppColors.primary,
-                    AppColors.primaryDark,
-                  ],
+                  colors: [AppColors.primary, AppColors.primaryDark],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -154,8 +146,10 @@ class _AIChatbotScreenState extends State<AIChatbotScreen> {
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 14,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.cardBackground,
                   borderRadius: BorderRadius.circular(16),
@@ -180,8 +174,9 @@ class _AIChatbotScreenState extends State<AIChatbotScreen> {
                             AppColors.primaryLight.withValues(alpha: 0.1),
                           ],
                         ),
-                        borderRadius:
-                            BorderRadius.circular(AppConstants.smallBorderRadius),
+                        borderRadius: BorderRadius.circular(
+                          AppConstants.smallBorderRadius,
+                        ),
                         border: Border.all(
                           color: AppColors.primary.withValues(alpha: 0.2),
                           width: 1,

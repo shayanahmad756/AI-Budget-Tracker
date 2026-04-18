@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:ai_budget_tracker/providers/transaction_provider.dart';
+import 'package:ai_budget_tracker/providers/theme_provider.dart';
 import 'package:ai_budget_tracker/utils/constants.dart';
 import 'package:ai_budget_tracker/widgets/summary_card.dart';
 import 'package:ai_budget_tracker/widgets/insight_card.dart';
@@ -26,7 +27,7 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: AppColors.background,
           appBar: AppBar(
             title: const Text(
-              'AI Budget Tracker',
+              'Budget Tracker',
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w700,
@@ -40,10 +41,7 @@ class HomeScreen extends StatelessWidget {
             surfaceTintColor: Colors.transparent,
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(1),
-              child: Container(
-                color: AppColors.border,
-                height: 1,
-              ),
+              child: Container(color: AppColors.border, height: 1),
             ),
             actions: [
               IconButton(
@@ -54,6 +52,21 @@ class HomeScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(builder: (_) => const HistoryScreen()),
                   );
+                },
+              ),
+              IconButton(
+                icon: Consumer<ThemeProvider>(
+                  builder: (context, themeProvider, _) {
+                    return Icon(
+                      themeProvider.isDarkMode
+                          ? Icons.light_mode_rounded
+                          : Icons.dark_mode_rounded,
+                    );
+                  },
+                ),
+                tooltip: 'Toggle Theme',
+                onPressed: () {
+                  context.read<ThemeProvider>().toggleTheme();
                 },
               ),
               const SizedBox(width: 8),
