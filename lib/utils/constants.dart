@@ -1,32 +1,44 @@
 import 'package:flutter/material.dart';
 
-/// Fintech-style colour palette used throughout the application.
+/// Modern fintech-style colour palette with professional gradients.
 ///
 /// Centralising colours here keeps the UI consistent and makes
 /// theme changes a single-file edit.
 class AppColors {
   AppColors._(); // prevent instantiation
 
-  /// Primary brand colour — dark teal.
-  static const Color primary = Color(0xFF0D7377);
+  /// Primary brand colour — modern deep blue/purple.
+  static const Color primary = Color(0xFF5B4E96);
+
+  /// Primary dark variant for darker backgrounds.
+  static const Color primaryDark = Color(0xFF4A3E7A);
+
+  /// Primary light variant for highlights.
+  static const Color primaryLight = Color(0xFF7B6FB1);
 
   /// Colour used to represent income amounts and indicators.
-  static const Color income = Color(0xFF2ECC71);
+  static const Color income = Color(0xFF10B981);
 
   /// Colour used to represent expense amounts and indicators.
-  static const Color expense = Color(0xFFE74C3C);
+  static const Color expense = Color(0xFFEF4444);
 
-  /// Overall app background — light grey.
-  static const Color background = Color(0xFFF5F6FA);
+  /// Overall app background — clean light.
+  static const Color background = Color(0xFFFAFAFC);
 
   /// Card / surface background — white.
   static const Color cardBackground = Color(0xFFFFFFFF);
 
-  /// Primary text colour — near-black.
-  static const Color textPrimary = Color(0xFF2D3436);
+  /// Primary text colour — dark charcoal.
+  static const Color textPrimary = Color(0xFF1F2937);
 
-  /// Secondary / muted text colour — grey.
-  static const Color textSecondary = Color(0xFF636E72);
+  /// Secondary / muted text colour — soft grey.
+  static const Color textSecondary = Color(0xFF6B7280);
+
+  /// Subtle border color.
+  static const Color border = Color(0xFFE5E7EB);
+
+  /// Accent color for highlights.
+  static const Color accent = Color(0xFFF59E0B);
 }
 
 /// Application-wide numeric constants (budgets, dimensions, radii).
@@ -41,6 +53,9 @@ class AppConstants {
 
   /// Border radius applied to card widgets.
   static const double cardBorderRadius = 16.0;
+
+  /// Small border radius for buttons and chips.
+  static const double smallBorderRadius = 8.0;
 }
 
 /// Helpers for transaction categories — labels, icons, and pie-chart colours.
@@ -73,13 +88,13 @@ class CategoryHelper {
 
   /// Maps each category to a distinct colour for charts and badges.
   static const Map<String, Color> categoryColors = {
-    'Food': Color(0xFFFF6B6B),
-    'Travel': Color(0xFF4ECDC4),
-    'Bills': Color(0xFFFFE66D),
-    'Shopping': Color(0xFFA29BFE),
-    'Entertainment': Color(0xFFFF9FF3),
-    'Health': Color(0xFF55E6C1),
-    'Education': Color(0xFF48DBFB),
-    'Other': Color(0xFFB8B8B8),
+    'Food': Color(0xFFF87171),
+    'Travel': Color(0xFF0EA5E9),
+    'Bills': Color(0xFFFBBF24),
+    'Shopping': Color(0xFFA78BFA),
+    'Entertainment': Color(0xFFF472B6),
+    'Health': Color(0xFF34D399),
+    'Education': Color(0xFF60A5FA),
+    'Other': Color(0xFF9CA3AF),
   };
 }

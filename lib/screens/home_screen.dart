@@ -25,10 +25,29 @@ class HomeScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: AppColors.background,
           appBar: AppBar(
-            title: const Text('AI Budget Tracker'),
+            title: const Text(
+              'AI Budget Tracker',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w700,
+                letterSpacing: -0.5,
+              ),
+            ),
+            centerTitle: false,
+            elevation: 0,
+            backgroundColor: AppColors.cardBackground,
+            foregroundColor: AppColors.textPrimary,
+            surfaceTintColor: Colors.transparent,
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(1),
+              child: Container(
+                color: AppColors.border,
+                height: 1,
+              ),
+            ),
             actions: [
               IconButton(
-                icon: const Icon(Icons.history),
+                icon: const Icon(Icons.history_rounded),
                 tooltip: 'Transaction History',
                 onPressed: () {
                   Navigator.push(
@@ -37,6 +56,7 @@ class HomeScreen extends StatelessWidget {
                   );
                 },
               ),
+              const SizedBox(width: 8),
             ],
           ),
           body: provider.isLoading
@@ -83,7 +103,8 @@ class HomeScreen extends StatelessWidget {
                   },
                   icon: const Icon(Icons.chat_bubble_outline),
                   label: const Text('Chat'),
-                  backgroundColor: Colors.teal.withValues(alpha: 0.8),
+                  backgroundColor: AppColors.primaryLight,
+                  foregroundColor: Colors.white,
                 ),
               ),
 
@@ -103,13 +124,16 @@ class HomeScreen extends StatelessWidget {
                   },
                   icon: const Icon(Icons.lightbulb_outline),
                   label: const Text('Suggestions'),
-                  backgroundColor: AppColors.primary.withValues(alpha: 0.8),
+                  backgroundColor: AppColors.primary,
+                  foregroundColor: Colors.white,
                 ),
               ),
 
               // ── Primary FAB: Add Transaction ───────────────────
               FloatingActionButton(
                 heroTag: 'add_fab',
+                backgroundColor: AppColors.accent,
+                foregroundColor: Colors.white,
                 onPressed: () {
                   Navigator.push(
                     context,
