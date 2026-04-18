@@ -7,6 +7,7 @@ import 'package:ai_budget_tracker/widgets/summary_card.dart';
 import 'package:ai_budget_tracker/widgets/insight_card.dart';
 import 'package:ai_budget_tracker/screens/add_transaction_screen.dart';
 import 'package:ai_budget_tracker/screens/history_screen.dart';
+import 'package:ai_budget_tracker/screens/ai_suggestions_screen.dart';
 
 /// Main dashboard screen of the AI Budget Tracker.
 ///
@@ -68,16 +69,43 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => const AddTransactionScreen(),
+          floatingActionButton: Stack(
+            alignment: Alignment.bottomRight,
+            children: [
+              // ── Secondary FAB: Smart Suggestions ───────────────
+              Positioned(
+                bottom: 80,
+                right: 0,
+                child: FloatingActionButton.extended(
+                  heroTag: 'suggestions_fab',
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const AISuggestionsScreen(),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.lightbulb_outline),
+                  label: const Text('Suggestions'),
+                  backgroundColor: AppColors.primary.withValues(alpha: 0.8),
                 ),
-              );
-            },
-            child: const Icon(Icons.add),
+              ),
+
+              // ── Primary FAB: Add Transaction ───────────────────
+              FloatingActionButton(
+                heroTag: 'add_fab',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const AddTransactionScreen(),
+                    ),
+                  );
+                },
+                child: const Icon(Icons.add),
+              ),
+            ],
           ),
         );
       },
