@@ -1,4 +1,4 @@
-# 🤖 AI Budget Tracker
+# Budget Tracker
 
 A modern, intelligent Flutter application that helps you track expenses, manage your budget, and gain AI-powered financial insights — all stored locally on your device.
 
@@ -6,31 +6,31 @@ A modern, intelligent Flutter application that helps you track expenses, manage 
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20Web-lightgrey)
 
-## ✨ Features
+##  Features
 
-### 📊 Smart Transaction Management
+###  Smart Transaction Management
 - **Add Income & Expenses** — Quickly log transactions with titles, amounts, categories, and dates
 - **Auto-Categorization** — AI-powered keyword matching automatically categorizes your expenses (Food, Travel, Bills, Shopping, Entertainment, Health, Education)
 - **Transaction History** — Browse and search all your past transactions in a clean, organized list
 
-### 🧠 AI-Powered Insights
+### Insights
 - **Spending Analysis** — Discover your highest spending categories
 - **Activity Trends** — Track whether your transaction activity is rising, falling, or steady
 - **Financial Health Score** — Get a 0-100 score based on your income vs. expenses ratio
 - **Smart Warnings** — Receive alerts when your expenses exceed your income
 
-### 📱 Beautiful UI/UX
+### Beautiful UI/UX
 - **Material Design 3** — Modern, polished interface with smooth animations
 - **Interactive Charts** — Visualize spending breakdowns with beautiful pie charts powered by fl_chart
 - **Summary Cards** — Quick overview of income, expenses, and budget status
 - **Dark & Light Themes** — Eye-friendly color scheme with fintech-style design
 
-### 💾 Local-First Architecture
+### Local-First Architecture
 - **SQLite Database** — Fast, reliable local storage for all your financial data
 - **Privacy-First** — No cloud servers, no data leaks — everything stays on your device
 - **Offline Support** — Full functionality without internet connection
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -67,7 +67,7 @@ A modern, intelligent Flutter application that helps you track expenses, manage 
    flutter run -d windows
    ```
 
-## 🏗️ Architecture
+## Architecture
 
 This project follows a clean, scalable architecture:
 
@@ -109,7 +109,7 @@ lib/
 | **intl** | Date formatting and localization |
 | **path_provider** | File system paths |
 
-## 🤖 AI Features Explained
+## Features Explained
 
 ### Smart Categorization
 The app uses keyword matching to automatically categorize expenses:
@@ -172,7 +172,7 @@ flutter build web --release
 flutter build windows --release
 ```
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -187,11 +187,13 @@ Contributions are welcome! Please follow these steps:
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
 ## 👤 Author
-
+**TEAM: Gate Smasher"
 **Shayan Ahmad**
+** Ali Haider**
 - GitHub: [@shayanahmad756](https://github.com/shayanahmad756)
+- GitHub: [@ali-haider1234](https://github.com/ali-haider1234)
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - [Flutter](https://flutter.dev/) — Amazing cross-platform framework
 - [fl_chart](https://github.com/imaNNeo/fl_chart) — Beautiful charting library
