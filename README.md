@@ -30,14 +30,6 @@ A modern, intelligent Flutter application that helps you track expenses, manage 
 - **Privacy-First** — No cloud servers, no data leaks — everything stays on your device
 - **Offline Support** — Full functionality without internet connection
 
-## 📸 Screenshots
-
-> *Add your screenshots here*
-
-| Home Screen | Add Transaction | History |
-|-------------|----------------|---------|
-| ![Home](screenshots/home.png) | ![Add](screenshots/add.png) | ![History](screenshots/history.png) |
-
 ## 🚀 Getting Started
 
 ### Prerequisites
