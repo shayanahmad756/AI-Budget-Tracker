@@ -191,8 +191,9 @@ class AIService {
       final highest = categoryTotals.entries.reduce(
         (a, b) => a.value >= b.value ? a : b,
       );
-      final percentage = (highest.value / totalExpenses * 100)
-          .toStringAsFixed(0);
+      final percentage = (highest.value / totalExpenses * 100).toStringAsFixed(
+        0,
+      );
       final tips = _getImprovementTipsForCategory(highest.key);
       suggestions.add(
         'You spent Rs.${highest.value.toStringAsFixed(0)} on ${highest.key} ($percentage% of total).\n'
@@ -215,8 +216,7 @@ class AIService {
 
     // --- Suggestion 3: Savings potential ---
     if (totalIncome > 0 && totalExpenses > 0) {
-      final savingsRate =
-          ((totalIncome - totalExpenses) / totalIncome * 100);
+      final savingsRate = ((totalIncome - totalExpenses) / totalIncome * 100);
       if (savingsRate < 20) {
         suggestions.add(
           'Your savings rate is only ${savingsRate.toStringAsFixed(1)}% - Below target of 20%.\n'
@@ -286,9 +286,7 @@ class AIService {
       );
     }
 
-    return suggestions.isEmpty
-        ? ['Keep tracking your finances!']
-        : suggestions;
+    return suggestions.isEmpty ? ['Keep tracking your finances!'] : suggestions;
   }
 
   /// Returns category-specific improvement tips.

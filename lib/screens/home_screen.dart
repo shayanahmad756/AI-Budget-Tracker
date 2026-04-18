@@ -8,6 +8,7 @@ import 'package:ai_budget_tracker/widgets/insight_card.dart';
 import 'package:ai_budget_tracker/screens/add_transaction_screen.dart';
 import 'package:ai_budget_tracker/screens/history_screen.dart';
 import 'package:ai_budget_tracker/screens/ai_suggestions_screen.dart';
+import 'package:ai_budget_tracker/screens/ai_chatbot_screen.dart';
 
 /// Main dashboard screen of the AI Budget Tracker.
 ///
@@ -63,13 +64,33 @@ class HomeScreen extends StatelessWidget {
 
                       // ── AI Insights ───────────────────────────────
                       _buildInsights(provider),
-                      const SizedBox(height: 80), // space for FAB
+                      const SizedBox(height: 200), // space for multiple FABs
                     ],
                   ),
                 ),
           floatingActionButton: Stack(
             alignment: Alignment.bottomRight,
             children: [
+              // ── Secondary FAB: AI Chatbot ─────────────────────
+              Positioned(
+                bottom: 160,
+                right: 0,
+                child: FloatingActionButton.extended(
+                  heroTag: 'chatbot_fab',
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const AIChatbotScreen(),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.chat_bubble_outline),
+                  label: const Text('Chat'),
+                  backgroundColor: Colors.teal.withValues(alpha: 0.8),
+                ),
+              ),
+
               // ── Secondary FAB: Smart Suggestions ───────────────
               Positioned(
                 bottom: 80,
